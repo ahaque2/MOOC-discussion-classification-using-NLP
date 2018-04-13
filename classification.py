@@ -42,10 +42,8 @@ from sklearn.metrics import recall_score
 from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib 
 
-<<<<<<< HEAD
+
 #Method for training and testing classification models
-=======
->>>>>>> 2e9d57d47708c2ca97f98972810e3c57bdac1d25
 def classification(tfidf, label, comments, tag, sk_fold, algo):
 	i = 0
 	models = []
@@ -84,12 +82,12 @@ def classification(tfidf, label, comments, tag, sk_fold, algo):
 			x_train = scaler.transform(x_train)  
 			x_test = scaler.transform(x_test) 
 			
-<<<<<<< HEAD
+
 		#Training the model with the specified classifier
 		clf_list, score, tag_clf = train_model(x_train, y_train, algo)
-=======
+
 		clf_list, predict_list, score, tag_clf = train_model_2(x_train, y_train, algo)
->>>>>>> 2e9d57d47708c2ca97f98972810e3c57bdac1d25
+
 		models.append(clf_list)
 		#joblib.dump(clf_list, str(i)+'_model_stemmed_Lem_3_20_iter.pkl')
 		
@@ -143,12 +141,12 @@ def classification(tfidf, label, comments, tag, sk_fold, algo):
 		avg_recall[u] = round(avg_recall[u]/sk_fold,2)
 		avg_f_measure[u] = round(avg_f_measure[u]/sk_fold,2)
 		
-<<<<<<< HEAD
+
 	#Writing the final results after averaging all values from k-fold iterations into text files
 	f= open("Results/Results_/Results_"+str(algo)+"_"+str(sk_fold)+"_.txt","w+")
-=======
+
 	f= open("Results/Results_removed_PN/Results_"+str(algo)+"_"+str(sk_fold)+"_.txt","w+")
->>>>>>> 2e9d57d47708c2ca97f98972810e3c57bdac1d25
+
 	f.write("precision - " + str(sum(total_precision)/sk_fold)+ "\t"+ str(avg_precision) +"\n")
 	f.write("recall - " + str(sum(total_recall)/sk_fold) + "\t\t" + str(avg_recall)+"\n")
 	f.write("f1-measure - " + str(sum(total_f_measure)/sk_fold) + "\t" + str(avg_f_measure)+"\n")
@@ -201,22 +199,15 @@ def ml_(x, y, algo):
 	#return fitted classifier, predicted classes, score and list of tag (in order as used by the classifier) 
 	return clf, predict, score, tag_clf
 
-<<<<<<< HEAD
+
 #Method to train the model on the given training data
 def train_model(data, y, algo):
-=======
-def train_model_2(data, y, algo):
->>>>>>> 2e9d57d47708c2ca97f98972810e3c57bdac1d25
 	
 	clf_list = []
 	label_list = []
 	print('Train model')
 	label = y.tolist()
-<<<<<<< HEAD
-	
-	#calling ml_ method to train the classifier model
-=======
->>>>>>> 2e9d57d47708c2ca97f98972810e3c57bdac1d25
+
 	clf, predict, score, tag_clf = ml_(data, label, algo)
 	clf_list.append(clf)
 	
