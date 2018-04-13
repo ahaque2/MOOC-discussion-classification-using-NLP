@@ -32,14 +32,10 @@ thread = np.load(np_arrays[2])
 comment_pos = np.load(np_arrays[3])
 comments = np.load(np_arrays[4])
 
-<<<<<<< HEAD
 #List of algorithm that needs to be run on the given data
 algo = ['DT','NN','KNN','NB','RF','ERF','ABC','GBC','SVM','ensemble']
 for alg in algo:
 	#Calling the classification.py file that does the remaining tasks of training and testing the various models and prints the results
 	classification(tfidf, label, comments, tags, sk_fold, alg)
-=======
-algo = ['SVM','NN','DT','KNN','NB','RF','ERF','ABC','GBC','ensemble']
-for alg in algo:
-	classification(tfidf, label, comments, tags, sk_fold, alg)
->>>>>>> 2e9d57d47708c2ca97f98972810e3c57bdac1d25
+
+
