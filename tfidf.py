@@ -1,4 +1,9 @@
-#Generating TF-IDF values
+'''
+This file generates TF-IDF values
+
+@author: amanul
+'''
+
 from __future__ import print_function
 import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -18,21 +23,23 @@ from time import time
 from pprint import pprint
 from string import punctuation
 	
-
+#Method that generates tf-idf values for the comments
 def generate_tf_idf(file):
 	print("Generating Tf-Idf np arrays ...")
 	vectorizer = TfidfVectorizer(ngram_range=(1,1))
-	#vectorizer = TfidfVectorizer()	
+	
+	#output files for the np-arrays generated
 	output_files = ['Data/tfidf.npy','Data/labels.npy','Data/thread_id.npy','Data/comment_position.npy','Data/comments.npy']
 	count_vect = CountVectorizer()
-
+	
+	#Reading the data from preprocessed data file
 	data = pd.read_csv(file, encoding = 'utf-8')
-	#print(data)
 	label = np.array(data.Tag)
 	thread = np.array(data.Comment_thread_id)
 	comment_pos = np.array(data.comment_position)
 	corpus = list((data.comments).values.astype('U'))
 	
+	#Initializing Vectorizer and then calculating tf-idf
 	vectorizer = CountVectorizer(stop_words='english')
 	X = vectorizer.fit_transform(corpus)
 	tf = X.toarray()
@@ -41,6 +48,7 @@ def generate_tf_idf(file):
 	Y = transformer.fit_transform(tf)
 	tfidf = Y.toarray()
 	
+	#Saving all the np-arrays generated for later use
 	np.save(output_files[0],tfidf)
 	np.save(output_files[1],label)
 	np.save(output_files[2],thread)
@@ -49,5 +57,6 @@ def generate_tf_idf(file):
 	
 	print("TF-IDF files successfully generated")
 	
+	#Returning the list of np-arrays file namess
 	return output_files
 
