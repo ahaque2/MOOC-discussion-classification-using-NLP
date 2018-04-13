@@ -1,4 +1,4 @@
-Requirements (You need to have following to run this code in any environment) 
+Requirements (You need to have the following to run this code in any environment) 
 
 Python 3.0 or above (https://docs.python.org/3/installing/)
 NLTK (https://www.nltk.org/install.html) -  NLTK is a leading platform for building Python programs to work with human language data
