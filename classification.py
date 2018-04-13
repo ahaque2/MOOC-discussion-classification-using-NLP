@@ -1,6 +1,5 @@
 '''
-This file trains te classifier models using the tf-idf values generated.
-Then uses cross-validation by splitting the given data to compute results metrics like - accuracy, precision, recall and f1-scores.
+This file trains the code for training and testing classifier models using the tf-idf values generated.
 
 @author: amanul
 '''
@@ -86,8 +85,6 @@ def classification(tfidf, label, comments, tag, sk_fold, algo):
 		#Training the model with the specified classifier
 		clf_list, score, tag_clf = train_model(x_train, y_train, algo)
 
-		clf_list, predict_list, score, tag_clf = train_model_2(x_train, y_train, algo)
-
 		models.append(clf_list)
 		#joblib.dump(clf_list, str(i)+'_model_stemmed_Lem_3_20_iter.pkl')
 		
@@ -131,7 +128,6 @@ def classification(tfidf, label, comments, tag, sk_fold, algo):
 	avg_recall = [0 for x in range(len(tag))]
 	avg_f_measure = [0 for x in range(len(tag))]
 	
-	
 	for u in range(len(tag)):
 		for v in range(sk_fold):
 			avg_precision[u] = avg_precision[u] + precision[v][u]
@@ -141,11 +137,8 @@ def classification(tfidf, label, comments, tag, sk_fold, algo):
 		avg_recall[u] = round(avg_recall[u]/sk_fold,2)
 		avg_f_measure[u] = round(avg_f_measure[u]/sk_fold,2)
 		
-
 	#Writing the final results after averaging all values from k-fold iterations into text files
-	f= open("Results/Results_/Results_"+str(algo)+"_"+str(sk_fold)+"_.txt","w+")
-
-	f= open("Results/Results_removed_PN/Results_"+str(algo)+"_"+str(sk_fold)+"_.txt","w+")
+	f= open("Results/Results_"+str(algo)+"_"+str(sk_fold)+"_.txt","w+")
 
 	f.write("precision - " + str(sum(total_precision)/sk_fold)+ "\t"+ str(avg_precision) +"\n")
 	f.write("recall - " + str(sum(total_recall)/sk_fold) + "\t\t" + str(avg_recall)+"\n")
@@ -290,4 +283,3 @@ def class_report_(class_report, tag):
 		
 	#Return the results for class-wise precision, recall and support for each class
 	return prec, rec, f_meas, support
-		
